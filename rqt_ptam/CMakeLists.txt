@@ -2,10 +2,15 @@ cmake_minimum_required(VERSION 2.8.3)
 project(rqt_ptam)
 
 find_package(Qt4 COMPONENTS QtCore QtGui REQUIRED)
-find_package(catkin REQUIRED)
+find_package(catkin REQUIRED COMPONENTS
+  rqt_gui
+  rqt_gui_cpp
+)
 
-
-catkin_package()
+catkin_package(
+  LIBRARIES ${PROJECT_NAME}
+  CATKIN_DEPENDS rqt_gui_cpp
+)
 
 include(${QT_USE_FILE})
 
@@ -34,5 +39,3 @@ qt4_wrap_ui(rqt_ptam_UIS_H ${rqt_ptam_UIS})
 include_directories(include ${rqt_ptam_INCLUDE_DIRECTORIES} ${catkin_INCLUDE_DIRS})
 add_library(rqt_ptam ${rqt_ptam_SRCS} ${rqt_ptam_MOCS} ${rqt_ptam_UIS_H})
 target_link_libraries(rqt_ptam ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY} ${catkin_LIBRARIES})
-
-
